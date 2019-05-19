@@ -1,0 +1,41 @@
+---
+title: "Exemplo - Dygraphs"
+author: "Karollaynne Silva"
+date: "19/05/2019"
+output: html_document
+---
+
+
+```{r import,echo=FALSE,error=FALSE,warning=FALSE,eval=TRUE}
+pacotes <- ("magrittr","dygraphs", "xts","readxl")
+
+lapply(pacotes,library,character.only=TRUE)
+
+dados_brent <-
+  readxl::read_xls("Brent.xls")
+
+dados_brent <-
+  xts::as.xts(x = dados_brent$Preço_Brent, order.by = dados_brent$Data)
+colnames(dados_brent)[1]<-"Preço_Brent"
+
+```
+
+
+#Gráfico 1: Preço do Petróleo Brent
+
+
+```{r preço, include=FALSE}
+dygraph(dados_brent,
+        main = "Preço do Petróleo Brent") %>% dyLimit(
+  9.1,
+  label = "preço mínimo",
+  labelLoc = "right",
+  color = "blue",
+  strokePattern = "dashed"
+) %>% dyLimit(
+  143.95,
+  label = "preço máximo",
+  labelLoc = "left",
+  color = "red",
+  strokePattern = "dashed"
+```
