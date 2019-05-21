@@ -1,7 +1,7 @@
 pacotes <- c("shiny", "xts", "dygraphs", "magrittr", "readxl")
 lapply(pacotes, library, character.only = TRUE)
 
-setwd("C:/Users/kmlou/OneDrive/Área de Trabalho/Input")
+setwd("C:\\Users\\kmlou\\OneDrive\\Área de Trabalho\\Dygraphs_IV_SER_UFF-master\\Input")
 
 dados_brent <-
   read_xls("Brent.xls")
@@ -14,10 +14,8 @@ colnames(dados_brent)[1] <- "Preço_Brent"
 
 #Ui
 
-ui <- fluidPage(# Application title
+ui <- fluidPage(
   titlePanel("Petróleo Brent"),
-  
-  # Show a plot of the generated distribution
   mainPanel(dygraphOutput("dygraph")))
 
 #Server

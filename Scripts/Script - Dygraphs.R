@@ -69,8 +69,6 @@ dygraph(dados_brent,
         ylab = "Preço do Petroléo (doláres)") %>% dyOptions(
           fillGraph = FALSE,
           fillAlpha = 0.5,
-          stepPlot = FALSE,
-          stemPlot = FALSE,
           drawPoints = FALSE,
           pointSize = 2,
           pointShape = "star",
