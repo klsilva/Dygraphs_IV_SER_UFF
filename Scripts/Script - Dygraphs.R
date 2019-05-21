@@ -4,7 +4,7 @@ lapply(pacotes, install.packages)
 lapply(pacotes, library, character.only = TRUE)
 
 #Define área de trabalho
-setwd("C:/Users/kmlou/OneDrive/Área de Trabalho/Input")
+setwd("C:\\Users\\kmlou\\OneDrive\\Área de Trabalho\\Dygraphs_IV_SER_UFF-master\\Input")
 
 ##Dygraphs
 
@@ -26,9 +26,10 @@ dados_brent <-
 colnames(dados_brent)[1] <- "Preço_Brent"
 
 
-#Função:Dygraphs
+# Função:Dygraphs
+# Função responsável por plotar os dados.
 
-#Caso - dados númericos
+# Caso - dados númericos
 
 dygraph(dados_num)
 
@@ -42,7 +43,8 @@ dygraph(dados_brent,
         xlab = "Anos",
         ylab = "Preço do Petroléo (doláres)")
 
-#Função:dyAxis
+# Função:dyAxis
+# Define opções para um eixo de um gráfico dygraph. 
 
 dygraph(dados_brent, main = "Preço do Petroléo Brent") %>% dyAxis(
   name = "x",
@@ -61,7 +63,8 @@ dygraph(dados_brent, main = "Preço do Petroléo Brent") %>% dyAxis(
 )
 
 
-#dyOptions
+# Função:dyOptions
+# Adiciona opções a um gráfico dygraph.
 
 dygraph(dados_brent,
         main = "Preço do Petróleo Brent",
@@ -69,11 +72,10 @@ dygraph(dados_brent,
         ylab = "Preço do Petroléo (doláres)") %>% dyOptions(
           fillGraph = FALSE,
           fillAlpha = 0.5,
-          drawPoints = FALSE,
+          drawPoints = TRUE,
           pointSize = 2,
           pointShape = "star",
-          colors = "blue",
-          colorValue = 0.5,
+          colors = "red",
           axisLabelFontSize = 14,
           axisLineColor = "black",
           axisLineWidth = 2,
@@ -82,10 +84,23 @@ dygraph(dados_brent,
           gridLineWidth = 2
         )
 
-#Função:dyCrosshair
-dygraph(dados_brent) %>%  dyCrosshair(direction = "vertical")
+# Função:dyCrosshair
+# Desenha uma linha sobre o ponto mais próximo ao mouse quando o usuário passa este sobre o gráfico.
 
-#Função:dyRangeSelector
+dygraph(dados_brent) %>%  dyCrosshair(direction = "both")
+
+
+# Exercício
+
+# Carregue o conjunto de dados "WTI.xls" como dados_wti
+# Plote o conjunto de dados.
+# Adicione o título "Preço do Petróleo WTI" ao gráfico
+# Adicione o label "Anos" para o eixo x e o label "Preço (USD)" ao eixo y
+# Customize o seu gráfico a partir do dyOptions. Dica: Utilize o help.
+
+
+# Função:dyRangeSelector
+# Adiciona um seletor de intervalo à parte inferior do gráfico que permite aos usuários deslocar e aplicar zoom a vários períodos
 
 dygraph(dados_brent) %>% dyRangeSelector(
   dateWindow = c("1996-03-04", "2006-03-04"),
@@ -94,8 +109,8 @@ dygraph(dados_brent) %>% dyRangeSelector(
   height = 40
 )
 
-#Função:dyUnzoom
-
+# Função:dyUnzoom
+# Adiciona o botão Unzoom no gráfico quando este está ampliado.
 dygraph(dados_brent) %>% dyRangeSelector(
   dateWindow = c("1996-03-04", "2006-03-04"),
   fillColor = "green",
@@ -104,8 +119,10 @@ dygraph(dados_brent) %>% dyRangeSelector(
 ) %>% dyUnzoom()
 
 
-#Função:dySeries
-#Dois eixos y
+# Função:dySeries
+# Adiciona uma série de dados a um gráfico dygraph.
+
+# Dois eixos y
 
 load("precipitacao_sp.Rda")
 load("temp_media_sp.Rda")
@@ -118,7 +135,7 @@ dygraph(tempo_sp, main = "Condições Climáticas de São Paulo em Janeiro de 2018")
   color = "green",
   fillGraph = FALSE,
   stepPlot = FALSE,
-  stemPlot = FALSE,
+  stemPlot = TRUE,
   drawPoints = FALSE,
   pointSize = 2,
   pointShape = "star",
@@ -145,7 +162,9 @@ dygraph(dados_precip) %>% dyShadow(name = "Precipitação")
 
 dygraph(tempo_sp, main = "Condições Climáticas de São Paulo em Janeiro de 2018") %>% dyFilledLine(name = "Precipitação")
 
-#Função:dyHighlight
+
+# Função:dyHighlight
+# Configura opções para destaques das série de dados quando o mouse é passado sobre o gráfico
 
 dygraph(tempo_sp, main = "Condições Climáticas de São Paulo em Janeiro de 2018") %>% dyHighlight(
   highlightCircleSize = 5,
@@ -153,18 +172,30 @@ dygraph(tempo_sp, main = "Condições Climáticas de São Paulo em Janeiro de 2018")
   hideOnMouseOut = FALSE
 )
 
-#Função:dyLegend
+
+# Exercício 
+
+# Una dados_wti e dados_brent e denomine prec_conj
+# Utilize o dyRangeSelector para o período de "1996-03-04" a "2016-03-04"
+# Adicione o botão de Unzoom ao gráfico
+# Por fim adicione o dyHighlight ao gráfico
+# Faça com que o highlight desapareça quando o mouse não esteja sobre o gráfico
+
+
+# Função:dyLegend
+# Configura a legenda dos gráficos.
 
 dygraph(tempo_sp, main = "Condições Climáticas de São Paulo em Janeiro de 2018") %>% dyLegend(
   show = "onmouseover",
   showZeroValues = TRUE,
-  hideOnMouseOut = FALSE,
+  hideOnMouseOut = TRUE,
   labelsSeparateLines = TRUE,
   width = 250
 )
 
 
-#Função:dyAnnotation
+# Função:dyAnnotation
+# Define uma anotação de texto para um dado específico.
 
 dygraph(dados_precip) %>% dyAnnotation(
   "2018-01-30",
@@ -176,7 +207,8 @@ dygraph(dados_precip) %>% dyAnnotation(
 )
 
 
-#Função:dyShading
+# Função:dyShading
+# Especifica uma região do gráfico para seja feito um sombreamento de plano de fundo.
 
 dygraph(dados_brent) %>% dyShading(
   from = "1990-09-02",
@@ -186,17 +218,19 @@ dygraph(dados_brent) %>% dyShading(
   axis = "x"
 )
 
-#Função:dyEvent
+# Função:dyEvent
+# Adiciona uma linha vertical relacionada a um evento.
 
 dygraph(dados_brent) %>% dyEvent(
   "2007-07-24",
   label = "Crise do Subprime",
-  labelLoc = "top",
+  labelLoc = "bottom",
   color = "black",
   strokePattern = "dashed"
 )
 
-#Função:dyLimit
+# Função:dyLimit
+# Adiciona linha de limite horizontal ao gráfico.
 
 dygraph(dados_brent) %>% dyLimit(
   min(dados_brent$Preço_Brent),
@@ -213,12 +247,23 @@ dygraph(dados_brent) %>% dyLimit(
 )
 
 
-#Função:dyRoller
+# Exercício
+
+# Plote o dados_wti
+# A partir das funções explicadas a cima:
+# Mostre onde ocorreu a Crise do Subprime ("2007-07-24")
+# Mostre a Guerra do Golfo (Início: "1990-09-02",Fim: "1991-02-28")
+# Indique um dos seus aniversário no gráfico. Qual era o preço do petróleo WTI no dia?
+# Mostre no gráfico o preço mínimo, médio e máximo do petróleo WTI.
+
+
+# Função:dyRoller
+# Adiciona uma caixa de texto que realiza média móvel à parte inferior do gráfico.
 
 dygraph(dados_brent) %>% dyRoller(showRoller = TRUE, rollPeriod = 120)
 
 
-#Mais uma aplicação:dySeries
+# Mais uma aplicação:dySeries
 
 dados_ts <-
   ts(data = rnorm(n = 20),
@@ -246,8 +291,8 @@ dygraph(dados_ts_all) %>%
   )
 
 
-#Função:dyPlugin
-
+# Função:dyPlugin
+# Inclui um plugin.
 dyHide <- function(dygraph) {
   dyPlugin(dygraph = dygraph,
            name = "Hide",
@@ -257,7 +302,7 @@ dyHide <- function(dygraph) {
 dygraph(tempo_sp, main = "Condições Climáticas de São Paulo em Janeiro de 2018") %>%
   dyHide()
 
-#Salvando o gráfico em png
+# Salvando o gráfico em png
 
 dygraph(dados_brent) %>% dyLimit(
   min(dados_brent$Preço_Brent),

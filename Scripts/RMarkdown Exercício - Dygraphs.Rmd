@@ -1,0 +1,20 @@
+---
+title: "Exemplo - Dygraphs"
+author: " "
+date: "`r format(Sys.Date(), '%d de %B de %Y')`"
+output: html_document
+---
+
+
+```{r import,eval=TRUE, echo=TRUE,message=FALSE,tidy=FALSE,error=FALSE,warning=FALSE,error=FALSE,results='hide'}
+#Use esta chunk para carregar os pacotes e dados necessários
+
+```
+
+
+#Gráfico 1: Preço do Petróleo Brent
+
+
+```{r preço, echo=FALSE,error=FALSE,warning=FALSE,eval=TRUE}
+#Insira seu gráfico aqui
+```
