@@ -13,3 +13,6 @@ No dia 21/05/2019 ministrei o minicurso 'Visualização de série temporais com 
 </ul>
 
 
+## Exemplo: gráfico sobre condições climáticas feito durante o minicurso
+
+![Exemplo](https://github.com/klsilva/Dygraphs_IV_SER_UFF/blob/master/Images/gif_exemplo.gif)
