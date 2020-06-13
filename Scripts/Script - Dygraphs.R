@@ -4,7 +4,7 @@ lapply(pacotes, install.packages)
 lapply(pacotes, library, character.only = TRUE)
 
 #Define área de trabalho
-setwd("C:\\Users\\kmlou\\OneDrive\\Área de Trabalho\\Dygraphs_IV_SER_UFF-master\\Input")
+setwd("Dygraphs_IV_SER_UFF-master\\Input")
 
 ##Dygraphs
 
